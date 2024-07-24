@@ -7,14 +7,23 @@ from colorama import Fore
 
 website='https://quotes.toscrape.com/'
 page_website= 'https://quotes.toscrape.com/page/{}'
+autor_website='https://quotes.toscrape.com/author/{}'
+informacion=[]
 
 def web_scraping(website):
     contenido= requests.get(website)
     soup = BeautifulSoup(contenido.text, 'lxml')
-    cita=soup.find_all('span',class_='text')
-    autor=soup.find_all('small',class_='author')
-    about=soup.find_all('div',class_='author_details')
-    tag=soup.find_all('meta',class_='keywords')
+    cita=soup.find_all('span',class_='text').get_text(strip=True)
+    autor=soup.find_all('small',class_='author').get_text(strip=True)
+    about=soup.find_all('div',class_='author_details')  .get_text(strip=True)  
+    tag=soup.find_all('meta',class_='keywords').get_text(strip=True)
+    author_links = soup.find_all('a', text='(about)').get_text(strip=True)
+    
+for link in author_links:
+    autor_url = autor_website + link['href']
+    author_name = link.find_previous('span', class_='nombre-autor')  # Ajustar según la estructura HTML
+    about_info = scrape_author_page(autor_url)
+
     print (cita)
     print(autor)    
     print(tag)
@@ -25,11 +34,11 @@ for page_number in range(1, 11):
     web_scraping(website)
 
 
-"""def about_author(website):
+def about_author(website):
     contenido= requests.get(website)
     soup = BeautifulSoup(contenido.text, 'lxml')
     about=soup.find_all('div',class_='quote')
 
 
 #about=soup.find_all('a',class_='href')
-#print(about)"""
+#print(about)
