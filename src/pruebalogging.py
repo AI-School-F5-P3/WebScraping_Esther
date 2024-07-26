@@ -1,16 +1,37 @@
+import logging.config
 import requests#funciona con HTTP/1.1
 import pandas as pd
-import re
+import re #expresiones regulares que permiten reemplazar múltiples caracteres a la vez
 from bs4 import BeautifulSoup
 from colorama import Fore #para añadir colores a los comentarios 
 import time
+import logging
+'''Para testear que ciertos bloques de código se ejecuten o no. 5 tipos de mensaje:
+Debug=10(testear cierta parte de nuestro código),
+Info=20(se encuentra en el flujo normal de la app)
+Warning=30(alerta)
+Error=40(mensaje de errores)
+Critical=50(alerta de que el programa ya no puede continuar)'''
 
+logging.basicConfig(level=logging.INFO,
+                    format='%(asctime)s - %(levelname)s - %(message)s',
+                    filename= 'WebScraping_Esther/log/scraping.log',
+                    filemode='a')
 
 page_website= 'https://quotes.toscrape.com/page/'
-about_website= 'https://quotes.toscrape.com/author/{}'
+about_website= 'https://quotes.toscrape.com/author/'
 
-#def about_scraping():
-
+'''def about_scraping():
+    about_author=[]
+    #author=re.sub(r'[ ,.]', '-',autor)
+    author_website=f'{about_website}{author}'
+    contenido_author = requests.get(author_website)
+    soup = BeautifulSoup(contenido_author.text, 'html.parser')
+    about=soup.find('div',class_='author_details')
+    diccionario_about={'About': about}
+    about_author.append(diccionario_about)
+    print(about_author)
+about_scraping()'''
 
 def quote_scraping():
     quote_data=[]
@@ -23,7 +44,7 @@ def quote_scraping():
             contenido = requests.get(website)
             contenido.raise_for_status()  
         except requests.RequestException as e:
-            print(f"{Fore.RED}Error: {e}{Fore.RESET}")
+            logging.error(f"{Fore.RED}Error: {e}{Fore.RESET}")
             break
 
         soup = BeautifulSoup(contenido.text, 'html.parser')
@@ -42,17 +63,19 @@ def quote_scraping():
 
             diccionario={'Cita':cita,'Autor':autor,'Tag':', '.join(tags)}#','.join(tags) para unir todos los tagas en un str y separarlos con ,
             quote_data.append(diccionario)            
-            #print(quote_data)
+            #logging.info(quote_data)
+            #about_scraping(autor)
 
 
         page_number +=1 #page_number = page_number + 1
         time.sleep(2)#tiempo que pasa entre una vuelta y otra que da el while
 
     df = pd.DataFrame(quote_data)
-    #df=df[['Cita':'CITA','Autor':'AUTOR','Tag':'TAGS']]
-    print(df)
+
+    logging.info(df)
         
 quote_scraping()
+
     
 """while True:
         website = page_website.format(page_number)
