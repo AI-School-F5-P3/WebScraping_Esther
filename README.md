@@ -25,7 +25,7 @@ La empresa **XYZ Corp** busca una frase que refleje sus valores y misión. Para 
 - Limpieza básica de datos extraídos.
 - Documentación básica del código y README en GitHub.
 
-### Nivel Medio
+#### Nivel Medio
 - Almacenamiento de los datos extraídos en una base de datos.
 - Implementación de un sistema de logs para la trazabilidad del código.
 
