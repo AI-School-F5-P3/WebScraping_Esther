@@ -49,7 +49,7 @@ Para crear un entorno virtual en Python y activarlo, se utilizaron los siguiente
 
 bash
 
-# Crear el entorno virtual
+#### Crear el entorno virtual (venv)
 python -m venv venv
 
 # Activar el entorno virtual (Windows)
