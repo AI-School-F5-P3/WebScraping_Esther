@@ -43,22 +43,23 @@ Proyecto Web Scraping/
 ├── README.md
 └── .env
 
+
 🌟 Descripción Adicional
 Creación del Entorno Virtual (venv)
 Para crear un entorno virtual en Python y activarlo, se utilizaron los siguientes comandos:
 
 bash
 
-#### Crear el entorno virtual (venv)
+Crear el entorno virtual (venv)
 python -m venv venv
 
-# Activar el entorno virtual (Windows)
+Activar el entorno virtual (Windows)
 venv\Scripts\activate
 
-# Instalar librerías desde requirements.txt
+Instalar librerías desde requirements.txt
 pip install -r requirements.txt
 
-# Creación del Archivo .env
+Creación del Archivo .env
 El archivo .env se utiliza para almacenar información sensible como las credenciales de la base de datos. Para crear el archivo .env, sigue estos pasos:
 
 Crea un archivo llamado .env en la raíz del proyecto.
@@ -69,7 +70,7 @@ HOST=tu_host
 PORT=tu_puerto
 DATABASE=tu_base_de_datos
 
-# Conexión a PostgreSQL con SQLAlchemy y os
+Conexión a PostgreSQL con SQLAlchemy y os
 Para conectar a la base de datos PostgreSQL, se utilizan las librerías sqlalchemy y os. La conexión se define de la siguiente manera en el archivo main.py:
 
 import os
@@ -87,7 +88,7 @@ DATABASE = os.getenv('DATABASE')
 connection_string = f'postgresql://{USER}:{PWD}@{HOST}:{PORT}/{DATABASE}'
 engine = create_engine(connection_string)
 
-# Configuración de logging
+Configuración de logging
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(levelname)s - %(message)s',
                     filename='WebScraping_Esther/log/scraping.log',
