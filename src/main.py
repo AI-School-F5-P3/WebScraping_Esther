@@ -4,11 +4,13 @@ from bs4 import BeautifulSoup
 from colorama import Fore #para añadir colores a los comentarios 
 import time
 from unidecode import unidecode #para estandarizar el lenguaje(limpiamos los acentos)
-from dotenv import load_dotenv
+from dotenv import load_dotenv #Para conectar con la db, y nos traemos la información de las variables creadas en el archivo .env
 import os #librería para interactuar con otros archivos
-from sqlalchemy import create_engine
-import psycopg2
-import logging
+from sqlalchemy import create_engine #Comunicación con db.
+import psycopg2 #Conectar con PostgreSQL
+import logging #Para los logs
+import pytest #Test unitarios
+
 '''Para testear que ciertos bloques de código se ejecuten o no. 5 tipos de mensaje:
 Debug=10(testear cierta parte de nuestro código),
 Info=20(se encuentra en el flujo normal de la app)
@@ -45,7 +47,7 @@ except Exception as e:
 
 
 connection_string = f'postgresql://{USER}:{PWD}@{HOST}:{PORT}/{DATABASE}'
-engine = create_engine(connection_string)
+engine = create_engine(connection_string) #motor necesario para asegurar la comunicación entre la app y la db
 table_name= 'XYZCorp_Datos'
 
 
@@ -117,7 +119,7 @@ def quote_scraping():
             diccionario={
                 'Cita':cita,
                 'Autor':autor,
-                'Tag':', '.join(tags), #','.join(tags) para unir todos los tagas en un str y separarlos con ,
+                'Tag':', '.join(tags), #','.join(tags) para unir todos los tags en un str y separarlos con ,
                 'Fecha_Nacimiento':autor_info['Fecha_Nacimiento'],
                 'Lugar_nacimiento':autor_info['Lugar_nacimiento'],
                 'Descripcion':autor_info['Descripcion']
