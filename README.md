@@ -28,7 +28,10 @@ La empresa **XYZ Corp** busca una frase que refleje sus valores y misión. Para 
 #### Nivel Medio
 - Almacenamiento de los datos extraídos en una base de datos.
 - Implementación de un sistema de logs para la trazabilidad del código.
-
+  
+#### Nivel Medio
+- Gestión de errores robusta para manejar excepciones comunes en web scraping.
+ 
 ## 📂 Estructura del Proyecto
 
 ```plaintext
